@@ -1,10 +1,13 @@
 require('dotenv').config()
 const integration = require('./contract/interacao')
+const hashManipulation = require('./src/hash')
 
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session")
+const crypto = require('crypto');
+
 
 app.set("view engine", "ejs");
 
@@ -27,6 +30,23 @@ app.get('/metadatas/:id', (req, res) => {
         `)
     }).catch(e => console.log(e))
 })
+
+// Rota para criar um NFT
+
+app.post('/arquivo', async (req, res) => {
+    const texto = req.body.texto;
+    const hash = hashManipulation.transformaHash(texto);
+    
+    try {
+        await integration.mint(hash, 'https://');
+        res.sendStatus(200);
+    } catch (error) {
+        console.error(error);
+        res.sendStatus(500);
+    }
+});
+
+
 
 
 app.listen(8080, e => {

@@ -32,21 +32,25 @@ async function claimUri(id) {
 
 
 async function mint(hash, uri) {
-
-  console.log("chamando função mint")
-  const tx = await contract.mint(
-    hash,
-    uri,
-    {
-      gasPrice: gasPrice,
-      gasLimit: gasLimit
-    },
-  );
-  //console.log(tx)
-  console.log('esperando resposta')
-  await tx.wait();
-  console.log(`transacao confirmada: ${tx.hash}`);
+  console.log("chamando função mint");
+  try {
+    const tx = await contract.mint(
+      hash,
+      uri,
+      {
+        gasPrice: gasPrice,
+        gasLimit: gasLimit
+      },
+    );
+    console.log('esperando resposta');
+    await tx.wait();
+    console.log(`transacao confirmada: ${tx.hash}`);
+  }catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
+
 
 module.exports = {mint, claimUri, claimData}
 
