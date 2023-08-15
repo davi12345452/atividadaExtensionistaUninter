@@ -23,7 +23,7 @@ const gasLimit = ethers.BigNumber.from('300000');
 
 async function claimData(id){
   const dados = await contract.getArq(id.toString())
-  return [dados.hashText, Date(Number(dados.data))]
+  return [dados.hashText, new Date(Number(dados.data) * 1000)]
 }
 
 async function claimUri(id) {
