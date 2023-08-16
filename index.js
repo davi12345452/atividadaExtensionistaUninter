@@ -15,8 +15,8 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-
-app.get('/', (req, res) => {
+// Rota para o mint
+app.get('/mint', (req, res) => {
     res.render('mint')
 })
 
