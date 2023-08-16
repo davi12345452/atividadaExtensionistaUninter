@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 
 app.get('/', (req, res) => {
-    res.send("Sucess")
+    res.render('mint')
 })
 
 // Rota do metadado
