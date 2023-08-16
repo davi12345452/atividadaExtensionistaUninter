@@ -1,6 +1,26 @@
 <%- include('partials/head.ejs') %>
-<form action="/arquivo" method="POST">
+<%- include('partials/navbar.ejs') %>
+<div class="container">
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3>Faça o mint do hash do seu texto e salve para sempre</h3>
+        </div>
+        <div class="card-footer">
+            <form action="/arquivo" method="POST">
+                <div class="form-group">
+                    <br>
+                    <textarea id="article" name="texto" class="form-control" placeholder="Escreva aqui o texto"></textarea>
+                    <hr>
+                </div>
+                <button class="btn btn-danger btn-block mt-4">Mintar</button>
+                <br>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('partials/footer.ejs') %>
+
+<!--<form action="/arquivo" method="POST">
     <textarea name="texto" id="" cols="30" rows="10"></textarea>
     <button>Enviar</button>
-</form>
-<%- include('partials/footer.ejs') %>
+</form>-->

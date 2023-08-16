@@ -45,10 +45,12 @@ async function mint(hash, uri) {
     console.log('esperando resposta');
     await tx.wait();
     console.log(`transacao confirmada: ${tx.hash}`);
+    return tx.hash
   }catch (error) {
     console.error(error);
     throw error;
   }
+  
 }
 
 

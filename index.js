@@ -38,8 +38,9 @@ app.post('/arquivo', async (req, res) => {
     const hash = hashManipulation.transformaHash(texto);
     
     try {
-        await integration.mint(hash, 'https://');
-        res.sendStatus(200);
+        tx = await integration.mint(hash, 'https://');
+        //res.sendStatus(200);
+        res.redirect(`https://mumbai.polygonscan.com/tx/${tx}`)
     } catch (error) {
         console.error(error);
         res.sendStatus(500);
