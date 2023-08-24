@@ -1,4 +1,25 @@
 <%- include('partials/head.ejs') %>
 <%- include('partials/navbar.ejs') %>
+<div class="container">
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3>Digite o texto e id do texto que deseja comparar</h3>
+        </div>
+        <div class="card-footer">
+            <form action="/comparar" method="POST">
+                <div class="form-group">
+                    <br>
+                    <textarea id="article" name="texto" class="form-control" placeholder="Escreva aqui o texto"></textarea>
+                    <br>
+                    <label for="">Id do NFT do texto</label>
+                    <input type="number" name="idToken" id="">
+                    <hr>
 
+                </div>
+                <button class="btn btn-danger btn-block mt-4">Comparar</button>
+                <br>
+            </form>
+        </div>
+    </div>
+</div>
 <%- include('partials/footer.ejs') %>
