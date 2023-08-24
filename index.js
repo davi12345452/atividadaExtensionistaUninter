@@ -27,16 +27,33 @@ app.get('/compare', (req, res) => {
 })
 // Rota para comparar
 
-app.post('/comparar', (req, res) => {
-    const tokenId = req.body.idToken;
-    const texto = req.body.texto;
-    const hashTexto = hashManipulation.transformaHash(texto);
-    let tokenData
-    integration.claimData(tokenId)
-    .then(
-        response => {tokenData = response[0]; console.log(tokenData)}) 
-    .catch(res.redirect('/compare'))
-})
+app.post('/comparar', async (req, res) => {
+    try {
+        const tokenId = req.body.idToken;
+        const texto = req.body.texto;
+
+        // Verifique se o ID do token ERC721 é válido
+        const tokenData = await integration.claimData(tokenId);
+
+        if (!tokenData) {
+            return res.status(400).json({ message: 'Token inválido' });
+        }
+
+        // Transforme o texto em hash
+        const hashTexto = hashManipulation.transformaHash(texto);
+
+        // Compare o hash do texto com o hash no token
+        if (hashTexto === tokenData[0]) {
+            return res.json({ message: 'Hash do texto é igual ao hash no token' });
+        } else {
+            return res.json({ message: 'Hash do texto não é igual ao hash no token' });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Erro interno do servidor' });
+    }
+});
+
 // Rota para criar arquivo
 app.post('/arquivo', async (req, res) => {
     const texto = req.body.texto;
